@@ -7,3 +7,8 @@ body,
 :root {
 	color-scheme: dark;
 }
+
+input[type="radio"],
+input[type="checkbox"] {
+	accent-color: #159b45;
+}

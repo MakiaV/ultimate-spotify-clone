@@ -1,15 +1,14 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 
-const LoginWithSocialBtn = ({
-	logo,
-	name,
-}: {
+type LoginBtn = {
 	logo: StaticImageData;
 	name: string;
-}) => {
+};
+
+const LoginWithSocialBtn = ({ logo, name }: LoginBtn) => {
 	return (
-		<div className="border border-solid border-[#767676] w-[330px] pl-8 py-2.5 mb-2 rounded-full hover:border-white cursor-default ">
+		<div className="border border-solid border-[#767676] w-[330px] pl-8 py-2.5 mb-2 rounded-full hover:border-white cursor-default">
 			<div className="flex justify-between items-center w-[215px]">
 				<div className="w-5">
 					<Image

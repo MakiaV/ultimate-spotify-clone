@@ -91,7 +91,7 @@ const Login = () => {
 							Don&apos;t have an account?
 						</p>
 						<Link
-							href="#"
+							href="/signup"
 							className="underline decoration-solid hover:decoration-[#1AD860] hover:text-[#1AD860]"
 						>
 							Sign up for Spotify
