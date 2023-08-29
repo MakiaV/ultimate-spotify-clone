@@ -6,6 +6,7 @@ html,
 body,
 :root {
 	color-scheme: dark;
+	/* overflow-y: hidden; */
 }
 
 input[type="radio"],

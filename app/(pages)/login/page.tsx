@@ -6,6 +6,11 @@ import appleLogo from "public/images/apple-logo.png";
 import githubLogo from "public/images/github-logo.png";
 import LoginWithSocialBtn from "@/app/components/LoginWithSocialBtn";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Login - Spotify Clone",
+};
 const Login = () => {
 	return (
 		<div>

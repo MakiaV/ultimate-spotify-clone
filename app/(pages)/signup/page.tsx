@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import LoginWithSocialBtn from "@/app/components/LoginWithSocialBtn";
 import Image from "next/image";
@@ -9,6 +9,11 @@ import facebookLogo from "public/images/facebook-logo-white.png";
 import appleLogo from "public/images/apple-logo.png";
 import githubLogo from "public/images/github-logo.png";
 import SignupWithSocialBtn from "@/app/components/SignupWithSocialBtn";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Sign up - Spotify Clone",
+};
 
 const Signup = () => {
 	return (
@@ -280,7 +285,7 @@ const Signup = () => {
 								href="#"
 							>
 								Terms of Service
-							</Link>
+							</Link>{" "}
 							and consent to the collection, processing and use of
 							my personal data, as described in more detail in the{" "}
 							<Link
