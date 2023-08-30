@@ -1,18 +1,15 @@
-const {
+import {
 	GraphQLObjectType,
 	GraphQLID,
 	GraphQLString,
-	GraphQLInt,
 	GraphQLList,
-} = require("graphql");
-
-const Album = require("../../models/Album");
-const Artist = require("../../models/Artist");
-const GenreModel = require("../../models/Genre");
-const User = require("../../models/User");
-
-// const AlbumType = require("./AlbumType");
-// const UserType = require("./UserType");
+} from "graphql";
+import AlbumType from "./AlbumType.js";
+import CommentArtistType from "./CommentArtistType.js";
+import AlbumModel from "../../models/Album.js";
+import UserType from "./UserType.js";
+import UserModel from "../../models/User.js";
+import SongType from "./SongType.js";
 
 const ArtistType = new GraphQLObjectType({
 	name: "Artist",
@@ -20,44 +17,37 @@ const ArtistType = new GraphQLObjectType({
 		id: { type: GraphQLID },
 		artistName: { type: GraphQLString },
 		artistPhoto: { type: GraphQLString },
-		artistBanner: { type: GraphQLString },
+		artistBackground: { type: GraphQLString },
 		artistInfos: { type: GraphQLString },
 		artistAlbums: {
-			type: GraphQLList(require("./AlbumType")),
+			type: GraphQLList(AlbumType),
 			resolve: async (parent, args) => {
 				// console.log("====>", parent.artistAlbums);
 				const res = await parent.artistAlbums.map((album) => {
-					return Album.findById(album.id).populate([
+					return AlbumModel.findById(album.id).populate([
 						"albumGenre",
 						"albumArtist",
-						"albumSongs",
+						"songs",
 					]);
 				});
 
 				return res;
 			},
 		},
-		artistFollowers: {
-			type: GraphQLList(require("./UserType")),
+		artistLikes: {
+			type: GraphQLList(UserType),
 			resolve: async (parent, args) => {
-				console.log("====>", parent);
-				const res = await parent.artistFollowers.map((user) => {
-					return User.findById(user);
-					// .populate([
-					// 	"albumGenre",
-					// 	"albumArtist",
-					// 	"albumSongs",
-					// ]);
+				// console.log("====>", parent);
+				const res = await parent.artistLikes.map((user) => {
+					return UserModel.findById(user);
 				});
 
 				return res;
 			},
-			// resolve(parent, args) {
-			// 	return User.findById(args.id);
-			// },
 		},
-		artistLikes: { type: GraphQLInt },
+		// artistPopularTracks: { type: GraphQLList(SongType) },
+		artistComments: { type: GraphQLList(CommentArtistType) },
 	}),
 });
 
-module.exports = ArtistType;
+export default ArtistType;

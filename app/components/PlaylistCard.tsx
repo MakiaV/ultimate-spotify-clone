@@ -4,12 +4,13 @@ import PlayBtn from "./PlayBtn";
 import { useSelector, useDispatch } from "react-redux";
 import { selectedPlaylist } from "@/redux/features/playerSlice";
 import { updatePlaylist } from "@/redux/features/playerSlice";
+import Link from "next/link";
 
 const PlaylistCard = ({ album }: any) => {
 	const dispatch = useDispatch();
 	const store: any = useSelector((state) => state);
 
-	console.log("store", store);
+	// console.log("store", store);
 
 	return (
 		<div
@@ -25,13 +26,14 @@ const PlaylistCard = ({ album }: any) => {
       overflow-hidden 
       gap-x-4 
       bg-neutral-400/5 
-      cursor-pointer 
+     
       hover:bg-neutral-400/10 
       transition 
       p-3
     "
 		>
-			<div
+			<Link
+				href={`/album/${album.id}`}
 				className="
         relative 
         aspect-square 
@@ -47,7 +49,7 @@ const PlaylistCard = ({ album }: any) => {
 					fill
 					alt="Image"
 				/>
-			</div>
+			</Link>
 			<div className="flex flex-col items-start w-full pt-4 gap-y-1">
 				<p className="font-semibold truncate w-full">
 					{album.albumName}
@@ -61,7 +63,7 @@ const PlaylistCard = ({ album }: any) => {
           truncate
         "
 				>
-					By {album.albumArtist[0].artistName}
+					{/* By {album.albumArtist[0].artistName} */}
 				</p>
 			</div>
 			<div

@@ -1,15 +1,13 @@
-const {
+import {
 	GraphQLObjectType,
 	GraphQLID,
 	GraphQLString,
 	GraphQLList,
-} = require("graphql");
-const PlaylistModel = require("../../models/Playlist");
-const SongModel = require("../../models/Song");
-const AlbumType = require("./AlbumType");
-const ArtistType = require("./ArtistType");
-const PlaylistType = require("./PlaylistType");
-const SongType = require("./SongType");
+} from "graphql";
+import AlbumType from "./AlbumType.js";
+import ArtistType from "./ArtistType.js";
+import PlaylistType from "./PlaylistType.js";
+import SongType from "./SongType.js";
 
 const UserType = new GraphQLObjectType({
 	name: "User",
@@ -20,7 +18,7 @@ const UserType = new GraphQLObjectType({
 		image: { type: GraphQLString },
 		hashedPassword: { type: GraphQLString },
 		userPlaylists: {
-			type: GraphQLList(require("./PlaylistType")),
+			type: GraphQLList(PlaylistType),
 			// resolve: async (parent, args) => {
 			// 	const pl = await parent.userPlaylists.map((playlist) => {
 			// 		console.log("parent", playlist.id);
@@ -29,9 +27,7 @@ const UserType = new GraphQLObjectType({
 			// 	return pl;
 			// },
 		},
-		artistFollow: {
-			type: GraphQLList(ArtistType),
-		},
+
 		artistLikes: {
 			type: GraphQLList(ArtistType),
 		},
@@ -41,10 +37,10 @@ const UserType = new GraphQLObjectType({
 		playlistLikes: {
 			type: GraphQLList(PlaylistType),
 		},
-		albumSongs: {
+		songs: {
 			type: GraphQLList(SongType),
 		},
 	}),
 });
 
-module.exports = UserType;
+export default UserType;

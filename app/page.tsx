@@ -1,29 +1,32 @@
 "use client";
 
 import Header from "./components/Header";
-import { useQuery } from "@apollo/client";
-import { GET_ALBUMS } from "../queries/albumQuerie";
-import { GET_PLAYLISTS } from "../queries/playlistQuerie";
+import { useQuery, gql } from "@apollo/client";
+
 import Image from "next/image";
 import PlaylistCard from "./components/PlaylistCard";
+import GET_ALBUMS from "@/queries/albumsQuery";
+import GET_PLAYLISTS from "@/queries/playlistsQuery";
 
 export default function Home() {
 	const QueryMultiple = () => {
-		const res1 = useQuery(GET_PLAYLISTS);
-		const res2 = useQuery(GET_ALBUMS);
+		const res1 = useQuery(GET_ALBUMS);
+		const res2 = useQuery(GET_PLAYLISTS);
+
 		return [res1, res2];
 	};
 
 	const [
+		{ error: errorAlbums, loading: loadingAlbums, data: dataAlbums },
 		{
 			error: errorPlaylists,
 			loading: loadingPlaylists,
 			data: dataPlaylists,
 		},
-		{ error: errorAlbums, loading: loadingAlbums, data: dataAlbums },
 	] = QueryMultiple();
 
-	console.log("dataAlbums", dataAlbums);
+	// console.log("dataPlaylists", dataPlaylists);
+	// console.log("dataAlbums", dataAlbums);
 
 	return (
 		<div className=" flex-grow  rounded-lg h-full w-full overflow-hidden overflow-y-auto">

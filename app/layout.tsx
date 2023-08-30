@@ -1,6 +1,11 @@
 "use client";
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+	ApolloClient,
+	InMemoryCache,
+	ApolloProvider,
+	gql,
+} from "@apollo/client";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
 

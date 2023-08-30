@@ -4,27 +4,8 @@ declare interface Playlist {
 	playlistDescription: string;
 	playlistArtwork: string;
 	playlistOwner: string;
-	playlistLikes: number;
+	playlistLikes: [User];
 	playlistArtists: [Artist];
-	albumSongs: [Song];
+	songs: [Song];
 	isUserPlaylist: boolean;
-	// albumSongs: [
-	// 	{
-	// 		id: string;
-	// 		songTitel: string;
-	// 		songGenre?: {
-	// 			id: string;
-	// 			genreName: string;
-	// 		};
-	// 		songArtist: [
-	// 			{
-	// 				id: string;
-	// 				artistName: string;
-	// 			}
-	// 		];
-	// 		songPlaycount: number;
-	// 		songSrc: string;
-	// 		albumArtwork: string;
-	// 	}
-	// ];
 }

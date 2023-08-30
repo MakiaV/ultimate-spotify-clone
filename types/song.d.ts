@@ -1,7 +1,6 @@
 declare interface Song {
 	id: string;
 	songTitle: string;
-	albumArtwork: string;
 	songPlaycount: number;
 	songLikes: number;
 	songArtist: [Artist];
@@ -10,6 +9,6 @@ declare interface Song {
 		genreName: string;
 	};
 	songSrc: string;
-	albumSong?: Album;
+	songAlbum?: Album;
 	index: number;
 }

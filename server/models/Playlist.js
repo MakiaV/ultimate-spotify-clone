@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const PlaylistSchema = new mongoose.Schema({
 	playlistName: {
@@ -7,14 +7,17 @@ const PlaylistSchema = new mongoose.Schema({
 	playlistDescription: {
 		type: String,
 	},
-	playlistLikes: {
-		type: Number,
-	},
+	playlistLikes: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+
+			ref: "User",
+		},
+	],
 	playlistOwner: {
 		type: mongoose.Schema.Types.ObjectId,
 
 		ref: "User",
-		// ref: "Artist",
 	},
 	playlistArtists: [
 		{
@@ -23,6 +26,7 @@ const PlaylistSchema = new mongoose.Schema({
 			ref: "Artist",
 		},
 	],
+
 	playlistArtwork: {
 		type: String,
 	},
@@ -30,9 +34,9 @@ const PlaylistSchema = new mongoose.Schema({
 		type: Boolean,
 	},
 
-	albumSongs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
+	songs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
 });
 
 const PlaylistModel = mongoose.model("Playlist", PlaylistSchema);
 
-module.exports = PlaylistModel;
+export default PlaylistModel;

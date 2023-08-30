@@ -1,37 +1,44 @@
 import { gql } from "@apollo/client";
 
-export const GET_PLAYLISTS = gql`
+const GET_PLAYLISTS = gql`
 	query {
 		playlists {
 			id
 			playlistName
+			playlistDescription
+			playlistLikes {
+				id
+			}
 			playlistOwner {
 				id
-				name
 			}
-			playlistLikes
-			isUserPlaylist
 			playlistArtwork
+			isUserPlaylist
+
 			playlistArtists {
 				id
 				artistName
 			}
-			playlistDescription
-			albumSongs {
+
+			songs {
 				id
+				songSrc
 				songTitle
-				songGenre {
-					id
-					genreName
-				}
+				songLyric
 				songArtist {
 					id
 					artistName
 				}
-				songPlaycount
-				songSrc
-				albumArtwork
+
+				songAlbum {
+					id
+					albumName
+					albumArtwork
+					albumBackground
+				}
 			}
 		}
 	}
 `;
+
+export default GET_PLAYLISTS;

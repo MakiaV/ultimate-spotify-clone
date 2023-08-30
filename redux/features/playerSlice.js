@@ -37,17 +37,16 @@ const playerSlice = createSlice({
 			if (Number.isInteger(action.payload.currentSongIndex)) {
 				if (
 					JSON.stringify(
-						action.payload.playlist.albumSongs.map(
+						action.payload.playlist.songs.map(
 							(song) => song.songSrc
 						)
 					) !== JSON.stringify(state.playlistSongs)
 				) {
 					state.playlist = action.payload.playlist;
 
-					state.playlistSongs =
-						action.payload.playlist.albumSongs.map(
-							(song) => song.songSrc
-						);
+					state.playlistSongs = action.payload.playlist.songs.map(
+						(song) => song.songSrc
+					);
 					state.playlistIsPlaying = true;
 					state.currentSongIndex = 0;
 					state.repeatOneSong = false;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const ArtistSchema = new mongoose.Schema({
 	artistName: {
@@ -7,7 +7,7 @@ const ArtistSchema = new mongoose.Schema({
 	artistPhoto: {
 		type: String,
 	},
-	artistBanner: {
+	artistBackground: {
 		type: String,
 	},
 	artistInfos: {
@@ -15,13 +15,10 @@ const ArtistSchema = new mongoose.Schema({
 	},
 
 	artistAlbums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
-	artistLikes: { type: Number },
 
-	artistFollowers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-
-	// artistBestTracks: []
+	artistLikes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 const ArtistModel = mongoose.model("Artist", ArtistSchema);
 
-module.exports = ArtistModel;
+export default ArtistModel;

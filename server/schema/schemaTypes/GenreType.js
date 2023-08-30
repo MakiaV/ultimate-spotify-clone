@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString } = require("graphql");
+import { GraphQLObjectType, GraphQLID, GraphQLString } from "graphql";
 
 const GenreType = new GraphQLObjectType({
 	name: "Genre",
@@ -6,7 +6,10 @@ const GenreType = new GraphQLObjectType({
 		id: { type: GraphQLID },
 		genreName: { type: GraphQLString },
 		genreInfos: { type: GraphQLString },
+		genreImg: { type: GraphQLString },
+		genreBannerImg: { type: GraphQLString },
+		genreBannerPosition: { type: GraphQLString },
 	}),
 });
 
-module.exports = GenreType;
+export default GenreType;

@@ -1,16 +1,19 @@
-const {
+import {
 	GraphQLObjectType,
 	GraphQLID,
 	GraphQLString,
 	GraphQLInt,
 	GraphQLList,
-} = require("graphql");
-const Album = require("../../models/Album");
-const Artist = require("../../models/Artist");
-const Genre = require("../../models/Genre");
-// const AlbumType = require("./AlbumType");
-const ArtistType = require("./ArtistType");
-const GenreType = require("./GenreType");
+} from "graphql";
+import ArtistType from "./ArtistType.js";
+import ArtistModel from "../../models/Artist.js";
+import GenreType from "./GenreType.js";
+
+import GenreModel from "../../models/Genre.js";
+import AlbumModel from "../../models/Album.js";
+import AlbumType from "./AlbumType.js";
+import UserType from "./UserType.js";
+import CommentSongType from "./CommentSongType.js";
 
 const SongType = new GraphQLObjectType({
 	name: "Song",
@@ -21,28 +24,35 @@ const SongType = new GraphQLObjectType({
 			type: GraphQLList(ArtistType),
 			resolve: async (parent, args) => {
 				const art = await parent.songArtist.map((artist) => {
-					return Artist.findById(artist);
+					return ArtistModel.findById(artist);
 				});
 				return art;
 			},
 		},
 		songSrc: { type: GraphQLString },
+		songLyric: { type: GraphQLString },
 		songGenre: {
 			type: GenreType,
 			resolve(parent, args) {
-				return Genre.findById(parent.songGenre);
+				return GenreModel.findById(parent.songGenre);
 			},
 		},
-		albumArtwork: { type: GraphQLString },
+		albumArtwork: {
+			type: GraphQLString,
+			// resolve(parent, args) {
+			// 	return AlbumModel.findById(parent.songGenre);
+			// },
+		},
 		songPlaycount: { type: GraphQLInt },
-		songLikes: { type: GraphQLInt },
-		albumSong: {
-			type: require("./AlbumType"),
+		songLikes: { type: GraphQLList(UserType) },
+		songComments: { type: GraphQLList(CommentSongType) },
+		songAlbum: {
+			type: AlbumType,
 			resolve(parent, args) {
-				return Album.findById(parent.albumSong);
+				return AlbumModel.findById(parent.songAlbum);
 			},
 		},
 	}),
 });
 
-module.exports = SongType;
+export default SongType;

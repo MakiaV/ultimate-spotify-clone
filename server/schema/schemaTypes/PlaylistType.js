@@ -1,15 +1,17 @@
-const {
+import {
 	GraphQLObjectType,
 	GraphQLID,
 	GraphQLString,
 	GraphQLInt,
 	GraphQLList,
 	GraphQLBoolean,
-} = require("graphql");
-const User = require("../../models/User");
-const ArtistType = require("./ArtistType");
-const SongType = require("./SongType");
-// const UserType = require("./UserType");
+} from "graphql";
+import UserModel from "../../models/User.js";
+import UserType from "./UserType.js";
+import ArtistType from "./ArtistType.js";
+import SongType from "./SongType.js";
+import ArtistModel from "../../models/Artist.js";
+import SongModel from "../../models/Song.js";
 
 const PlaylistType = new GraphQLObjectType({
 	name: "Playlist",
@@ -17,25 +19,38 @@ const PlaylistType = new GraphQLObjectType({
 		id: { type: GraphQLID },
 		playlistName: { type: GraphQLString },
 		playlistDescription: { type: GraphQLString },
+
 		playlistOwner: {
-			type: require("./UserType"),
+			type: UserType,
 			resolve: async (parent, args) => {
-				// console.log("====>", parent);
-				const res = await User.findById(parent.playlistOwner);
+				const res = await UserModel.findById(parent.playlistOwner);
 
 				return res;
 			},
 		},
 		playlistArtwork: { type: GraphQLString },
 		isUserPlaylist: { type: GraphQLBoolean },
-		playlistLikes: { type: GraphQLInt },
+		playlistLikes: { type: GraphQLList(UserType) },
 		playlistArtists: {
 			type: GraphQLList(ArtistType),
+			resolve: async (parent, args) => {
+				const art = await parent.playlistArtists.map((artist) => {
+					return ArtistModel.findById(artist);
+				});
+				return art;
+			},
 		},
-		albumSongs: {
+
+		songs: {
 			type: GraphQLList(SongType),
+			resolve: async (parent, args) => {
+				const sg = await parent.songs.map((song) => {
+					return SongModel.findById(song);
+				});
+				return sg;
+			},
 		},
 	}),
 });
 
-module.exports = PlaylistType;
+export default PlaylistType;

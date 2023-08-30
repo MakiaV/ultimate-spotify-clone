@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const AlbumSchema = new mongoose.Schema({
 	albumName: {
@@ -7,16 +7,19 @@ const AlbumSchema = new mongoose.Schema({
 	albumYear: {
 		type: Number,
 	},
-	albumLikes: {
-		type: Number,
-	},
-	albumArtist: [
+	albumLikes: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 
-			ref: "Artist",
+			ref: "User",
 		},
 	],
+	albumArtist: {
+		type: mongoose.Schema.Types.ObjectId,
+
+		ref: "Artist",
+	},
+
 	albumGenre: {
 		type: mongoose.Schema.Types.ObjectId,
 
@@ -25,10 +28,18 @@ const AlbumSchema = new mongoose.Schema({
 	albumArtwork: {
 		type: String,
 	},
+	albumBackground: {
+		type: String,
+	},
 
-	albumSongs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
+	albumType: {
+		type: String,
+		enum: ["Album", "Single", "EP"],
+	},
+
+	songs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
 });
 
 const AlbumModel = mongoose.model("Album", AlbumSchema);
 
-module.exports = AlbumModel;
+export default AlbumModel;
