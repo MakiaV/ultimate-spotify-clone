@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { AiFillExclamationCircle } from "react-icons/ai";
@@ -114,7 +116,7 @@ const RegisterForm = () => {
 					console.log("OK");
 					const form = e.target;
 					form.reset();
-					router.push("/");
+					router.push("/login");
 				} else {
 					console.log("User registration failed.");
 				}

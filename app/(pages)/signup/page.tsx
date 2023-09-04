@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { useState } from "react";
 
@@ -14,8 +14,19 @@ import SignupWithSocialBtn from "@/app/components/SignupWithSocialBtn";
 import type { Metadata } from "next";
 import RegisterForm from "@/app/components/RegisterForm";
 import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const Signup = () => {
+// import { useSession } from "next-auth/react";
+
+const Signup = async () => {
+	// const { data: session } = useSession();
+
+	const session = await getServerSession(authOptions);
+
+	if (session) redirect("/");
+
 	return (
 		<div
 			style={{ colorScheme: "light" }}
