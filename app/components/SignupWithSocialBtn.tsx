@@ -1,3 +1,5 @@
+"use client";
+import { signIn } from "next-auth/react";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 
@@ -14,8 +16,11 @@ const SignupWithSocialBtn = ({
 	btnBgColor,
 	btnTxtColor,
 }: SignupBtn) => {
+	const socialName = name.toLowerCase();
+
 	return (
 		<div
+			onClick={() => signIn(`${socialName}`)}
 			className="flex justify-center gap-x-5 items-center border border-solid border-[#767676] w-[400px] py-3 mb-3 rounded-full cursor-pointer hover:scale-105"
 			style={{ backgroundColor: btnBgColor, color: btnTxtColor }}
 		>

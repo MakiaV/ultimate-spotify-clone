@@ -51,7 +51,6 @@ const Login = () => {
 
 					<LoginWithSocialBtn logo={googleLogo} name="Google" />
 					<LoginWithSocialBtn logo={facebookLogo} name="Facebook" />
-					<LoginWithSocialBtn logo={appleLogo} name="Apple" />
 					<LoginWithSocialBtn logo={githubLogo} name="Github" />
 					<div className="w-[500px] border border-b-0 border-[#292929] mt-8"></div>
 					<LoginForm setError={setError} />

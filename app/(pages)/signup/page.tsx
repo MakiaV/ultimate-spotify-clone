@@ -49,12 +49,7 @@ const Signup = async () => {
 				btnTxtColor="#FFF"
 			/>
 			<SignupWithSocialBtn logo={googleLogo} name="Google" />
-			<SignupWithSocialBtn
-				logo={appleLogo}
-				name="Apple"
-				btnBgColor="#53575e"
-				btnTxtColor="#FFF"
-			/>
+
 			<SignupWithSocialBtn
 				logo={githubLogo}
 				name="Github"
