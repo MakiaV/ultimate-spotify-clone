@@ -1,5 +1,7 @@
 "use client";
 
+import { SessionProvider } from "next-auth/react";
+
 import {
 	ApolloClient,
 	InMemoryCache,
@@ -36,12 +38,14 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={figtree.className}>
-				<ApolloProvider client={client}>
-					<Provider store={store}>
-						<Main>{children}</Main>
-						<Player />
-					</Provider>
-				</ApolloProvider>
+				<SessionProvider>
+					<ApolloProvider client={client}>
+						<Provider store={store}>
+							<Main>{children}</Main>
+							<Player />
+						</Provider>
+					</ApolloProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);
